@@ -23,6 +23,9 @@ LOGO = customtkinter.CTkImage(light_image=Image.open("images/chasseLogo.png"),
 CHAT = customtkinter.CTkImage(light_image=Image.open("images/image.png"),
                                    dark_image=Image.open("images/image.png"),
                                    size=(135, 169))
+BRAILLE = customtkinter.CTkImage(light_image=Image.open("images/braile.png"),
+                                   dark_image=Image.open("images/braile.png"),
+                                   size=(268, 48))
 
 app.title("Connexion")
 app.geometry("450x550")
@@ -60,15 +63,12 @@ def bravo():
     frame_lieux.rowconfigure(3, weight=1)
     frame_lieux.rowconfigure(4, weight=1)
 
-    titre = customtkinter.CTkLabel(master=frame_lieux, text="Bravoooo", font=TITRE, text_color="#58B655",
+    titre = customtkinter.CTkLabel(master=frame_lieux, text="Bravoooo !!!", font=TITRE, text_color="#58B655",
                                    anchor="w")
-    titre.grid(column=0, row=3, columnspan=5, padx=20, pady=20)
+    titre.grid(column=0, row=2, columnspan=5, padx=20, pady=20)
 
-    sleep(2)
-
-    frame_lieux.destroy()
-
-
+    button = customtkinter.CTkButton(frame_lieux, text="J'suis la meilleure et je continue!", command=etape2, width=150, height=50, fg_color="#58B655")
+    button.grid(column=0, row=4, columnspan=5, padx=20, pady=20)
 
 
 def frame_top():
@@ -106,7 +106,6 @@ def etape1():
         if mot.get() == "caboulot":
             frame_lieux.destroy()
             bravo()
-            etape2()
 
     titre = customtkinter.CTkLabel(master=frame_lieux, text="Mais oussé kessé ça?", font=TITRE2, text_color="#A8E3FF",anchor="w")
     titre.grid(column=0, row=0, columnspan=5, padx=20, pady=20)
@@ -149,44 +148,134 @@ def etape2():
     frame_lieux.rowconfigure(3, weight=1)
     frame_lieux.rowconfigure(4, weight=1)
 
+    def bon():
+        if mot.get() == "murage":
+            frame_lieux.destroy()
+            bravo()
+
     titre = customtkinter.CTkLabel(master=frame_lieux, text="Bin là... Braille pas?", font=TITRE2, text_color="#A8E3FF",
                                    anchor="w")
-    titre.grid(column=0, row=0, columnspan=5, padx=20, pady=20)
+    titre.grid(column=0, row=0, columnspan=5, padx=20)
+
+    indice1 = customtkinter.CTkLabel(master=frame_lieux, text="Tout nu\nL'arbre de Noël a changé...\nHey bitch\nFirst kiss\nReprend TON chapeau\nEntre deux barbies", font=INDICE, text_color="#A8E3FF")
+    indice1.grid(column=0, row=1, columnspan=5, padx=20)
+    indice2 = customtkinter.CTkLabel(frame_lieux, text="", image=BRAILLE, compound="left")
+    indice2.grid(column=0, row=2, columnspan=5, padx=20)
+
+    frame_reponse = customtkinter.CTkFrame(master=frame_lieux)
+    frame_reponse.grid(column=0, row=3, columnspan=5, padx=20)
+    mot = customtkinter.CTkEntry(frame_reponse, placeholder_text="Mot secret", width=375)
+    mot.grid(column=0, row=0, sticky="e", padx=5, pady=20)
+    button = customtkinter.CTkButton(frame_reponse, text="Enter", command=bon, width=100)
+    button.grid(column=1, row=0, sticky="w", padx=5, pady=20)
 
 
-auth = False
-def login_checkbox():
-    global auth
-    auth = check_var.get()
+def etape3():
+    frame_lieux = customtkinter.CTkFrame(master=app, fg_color="gray13")
+    frame_lieux.grid(column=1, row=1, pady=20, padx=20, sticky="nsew")
+    # Column configure
+    frame_lieux.columnconfigure(0, weight=1)
+    frame_lieux.columnconfigure(1, weight=1)
+    frame_lieux.columnconfigure(2, weight=1)
+    frame_lieux.columnconfigure(3, weight=1)
+    frame_lieux.columnconfigure(4, weight=1)
+    # Row configure
+    frame_lieux.rowconfigure(0, weight=1)
+    frame_lieux.rowconfigure(1, weight=1)
+    frame_lieux.rowconfigure(2, weight=1)
+    frame_lieux.rowconfigure(3, weight=1)
+    frame_lieux.rowconfigure(4, weight=1)
 
-def login_button():
-    if auth and username.get() == "RabbidRabbit69" and password.get() == "easter":
-        clear()
-        setup()
-        frame_top()
-        etape1()
-    else:
-        etat = customtkinter.CTkLabel(master=frame, text="Erreur", font=customtkinter.CTkFont(family="Roboto", size=15), text_color="red", anchor="n")
-        etat.pack(fill="both")
+    def bon():
+        if mot.get() == "michelin":
+            frame_lieux.destroy()
+            bravo()
+
+    titre = customtkinter.CTkLabel(master=frame_lieux, text="I spy with my little eye", font=TITRE2, text_color="#A8E3FF",
+                                   anchor="w")
+    titre.grid(column=0, row=0, columnspan=5, padx=20)
+
+    indice1 = customtkinter.CTkLabel(master=frame_lieux, text="Un panier (de pâques?)", font=INDICE, text_color="#A8E3FF")
+    indice1.grid(column=0, row=1, columnspan=5, padx=20)
+
+    frame_reponse = customtkinter.CTkFrame(master=frame_lieux)
+    frame_reponse.grid(column=0, row=3, columnspan=5, padx=20)
+    mot = customtkinter.CTkEntry(frame_reponse, placeholder_text="Mot secret", width=375)
+    mot.grid(column=0, row=0, sticky="e", padx=5, pady=20)
+    button = customtkinter.CTkButton(frame_reponse, text="Enter", command=bon, width=100)
+    button.grid(column=1, row=0, sticky="w", padx=5, pady=20)
 
 
-frame = customtkinter.CTkFrame(master=app)
-frame.pack(expand=True, padx=30, pady=30)
-connexion = customtkinter.CTkLabel(master=frame, text="Connexion", font=TITRE, text_color="#A8E3FF", anchor="n")
-connexion.pack(fill="y", pady=60)
-username = customtkinter.CTkEntry(frame, placeholder_text="Nom d'utilisateur", width=375)
-username.pack(padx=55)
-password = customtkinter.CTkEntry(frame, placeholder_text="Mot de passe", width=375)
-password.pack(padx=55, pady=15)
-check_var = customtkinter.StringVar(value="off")
-checkbox = customtkinter.CTkCheckBox(frame, text="Je suis vraiment le lapin de pâques promis juré craché!", command=login_checkbox, variable=check_var, onvalue="on", offvalue="off", width=375)
-checkbox.pack(padx=55, pady=15)
-button = customtkinter.CTkButton(frame, text="Se connecter", command=login_button, width=375)
-button.pack(padx=55, pady=60)
+def etape4():
+    frame_lieux = customtkinter.CTkFrame(master=app, fg_color="gray13")
+    frame_lieux.grid(column=1, row=1, pady=20, padx=20, sticky="nsew")
+    # Column configure
+    frame_lieux.columnconfigure(0, weight=1)
+    frame_lieux.columnconfigure(1, weight=1)
+    frame_lieux.columnconfigure(2, weight=1)
+    frame_lieux.columnconfigure(3, weight=1)
+    frame_lieux.columnconfigure(4, weight=1)
+    # Row configure
+    frame_lieux.rowconfigure(0, weight=1)
+    frame_lieux.rowconfigure(1, weight=1)
+    frame_lieux.rowconfigure(2, weight=1)
+    frame_lieux.rowconfigure(3, weight=1)
+    frame_lieux.rowconfigure(4, weight=1)
+
+    def bon():
+        if mot.get() == "michelin":
+            frame_lieux.destroy()
+            bravo()
+
+    titre = customtkinter.CTkLabel(master=frame_lieux, text="Cap ô coco", font=TITRE2, text_color="#A8E3FF",
+                                   anchor="w")
+    titre.grid(column=0, row=0, columnspan=5, padx=20)
+
+    indice1 = customtkinter.CTkLabel(master=frame_lieux, text="Cherche au point le plus à l'ouest du rez-de-chaussé", font=INDICE, text_color="#A8E3FF")
+    indice1.grid(column=0, row=1, columnspan=5, padx=20)
+
+    frame_reponse = customtkinter.CTkFrame(master=frame_lieux)
+    frame_reponse.grid(column=0, row=3, columnspan=5, padx=20)
+    mot = customtkinter.CTkEntry(frame_reponse, placeholder_text="Resultat", width=375)
+    mot.grid(column=0, row=0, sticky="e", padx=5, pady=20)
+    button = customtkinter.CTkButton(frame_reponse, text="Enter", command=bon, width=100)
+    button.grid(column=1, row=0, sticky="w", padx=5, pady=20)
+
+
+if True == False:
+    auth = False
+    def login_checkbox():
+        global auth
+        auth = check_var.get()
+
+    def login_button():
+        if auth and username.get() == "RabbidRabbit69" and password.get() == "easter":
+            clear()
+            setup()
+            frame_top()
+            etape1()
+        else:
+            etat = customtkinter.CTkLabel(master=frame, text="Erreur", font=customtkinter.CTkFont(family="Roboto", size=15), text_color="red", anchor="n")
+            etat.pack(fill="both")
+
+
+    frame = customtkinter.CTkFrame(master=app)
+    frame.pack(expand=True, padx=30, pady=30)
+    connexion = customtkinter.CTkLabel(master=frame, text="Connexion", font=TITRE, text_color="#A8E3FF", anchor="n")
+    connexion.pack(fill="y", pady=60)
+    username = customtkinter.CTkEntry(frame, placeholder_text="Nom d'utilisateur", width=375)
+    username.pack(padx=55)
+    password = customtkinter.CTkEntry(frame, placeholder_text="Mot de passe", width=375)
+    password.pack(padx=55, pady=15)
+    check_var = customtkinter.StringVar(value="off")
+    checkbox = customtkinter.CTkCheckBox(frame, text="Je suis vraiment le lapin de pâques promis juré craché!", command=login_checkbox, variable=check_var, onvalue="on", offvalue="off", width=375)
+    checkbox.pack(padx=55, pady=15)
+    button = customtkinter.CTkButton(frame, text="Se connecter", command=login_button, width=375)
+    button.pack(padx=55, pady=60)
 
 
 
 setup()
-#frame_top()
-#etape1()
+frame_top()
+etape4()
 app.mainloop()
